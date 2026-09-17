@@ -4,7 +4,7 @@ import type { AppOrder } from '@/types/AppOrder'
 import { AuthService } from './auth.service'
 import type { AppUser } from '@/types/AppUser'
 import { OrderMapper } from '@/mapper/order.mapper'
-import type { EntityOrder } from '@/types/EntityOrder'
+import { type EntityOrder } from '../types/EntityOrder'
 
 export class OrderService {
   private readonly supabase: SupabaseClient
@@ -32,6 +32,34 @@ export class OrderService {
     }
     //Map each db order to correct type
     const existingOrders: AppOrder[] = orders.data.map((order: EntityOrder) =>
+      this.orderMapper.entityToApp(order),
+    )
+    return existingOrders
+  }
+
+  /**
+   * Loads the most recent orders of the current logged user
+   * @returns {Promise<AppOrder[]>} Promise with an array with all the recent orders of the user
+   * @author Oriol Plazas León
+   * @since 17/09/2026
+   * @throws Error if cannot load user orders
+   */
+  public async getRecentOrders(): Promise<AppOrder[]> {
+    const user: AppUser = await this.authService.getMe()
+    const now = new Date()
+    const nextWeek = new Date()
+    nextWeek.setDate(now.getDate() + 7)
+    const { data, error } = await this.supabase
+      .from('orders')
+      .select('*')
+      .eq('user_id', user.id)
+      .gte('estimated_delivery', now.toISOString())
+      .lte('estimated_delivery', nextWeek.toISOString())
+    if (error) {
+      throw new Error(error.message)
+    }
+    //Map each db order to correct type
+    const existingOrders: AppOrder[] = data.map((order: EntityOrder) =>
       this.orderMapper.entityToApp(order),
     )
     return existingOrders

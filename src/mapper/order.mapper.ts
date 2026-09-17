@@ -11,6 +11,7 @@ export class OrderMapper {
       currency: entity.currency,
       trackingNumber: entity.tracking_number,
       carrier: entity.carrier,
+      company: entity.company,
       status: entity.status ?? 'unknown',
       estimatedDelivery: entity.estimated_delivery ? new Date(entity.estimated_delivery) : null,
       createdAt: new Date(entity.created_at),

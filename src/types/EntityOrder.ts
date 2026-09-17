@@ -1,3 +1,5 @@
+import type { Currency } from './Currency'
+
 export type EntityOrder = {
   id: string
   user_id: string
@@ -5,7 +7,7 @@ export type EntityOrder = {
   merchant: string | null
   order_id: string | null
   total: number | null
-  currency: string | null
+  currency: Currency | null
   tracking_number: string | null
   carrier: string | null
   status: string | null
