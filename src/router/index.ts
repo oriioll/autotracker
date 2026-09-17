@@ -1,8 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
-import EmailsView from '@/views/EmailsView.vue'
 import { AuthService } from '@/services/auth.service.ts'
 import type { AppUser } from '@/types/AppUser.ts'
+import DashboardView from '@/views/DashboardView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
+import TermsView from '@/views/TermsView.vue'
+import CookiesView from '@/views/CookiesView.vue'
+import PrivacyView from '@/views/PrivacyView.vue'
 const authService: AuthService = new AuthService()
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,20 +15,64 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView,
-      //meta: { guestOnly: true },
+      meta: {
+        guestOnly: true,
+        title: 'Sign in | AutoTracker',
+        description: 'Sign in to AutoTracker to manage and track your online orders.',
+        canonical: '/login',
+      },
     },
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: EmailsView,
-      meta: { requiresAuth: true },
+      component: DashboardView,
+      meta: {
+        requiresAuth: true,
+        title: 'Orders dashboard | AutoTracker',
+        description: 'View and organize your online orders in the AutoTracker dashboard.',
+        canonical: '/dashboard',
+      },
     },
-    /*{
-      path: '/',
-      name: 'home',
-      component: HomeView,
-      meta: { public: true },
-    },*/
+    {
+      path: '/terms',
+      name: 'terms',
+      component: TermsView,
+      meta: {
+        title: 'Terms of Service | AutoTracker',
+        description: 'Terms governing the use of the AutoTracker service.',
+        canonical: '/terms',
+      },
+    },
+    {
+      path: '/cookies',
+      name: 'cookies',
+      component: CookiesView,
+      meta: {
+        title: 'Cookie Policy | AutoTracker',
+        description: 'Information about cookies and similar technologies used by AutoTracker.',
+        canonical: '/cookies',
+      },
+    },
+    {
+      path: '/privacy',
+      name: 'privacy',
+      component: PrivacyView,
+      meta: {
+        title: 'Privacy Policy | AutoTracker',
+        description: 'How AutoTracker processes personal data under EU and Spanish data protection law.',
+        canonical: '/privacy',
+      },
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: NotFoundView,
+      meta: {
+        title: 'Page not found | AutoTracker',
+        description: 'The requested AutoTracker page could not be found.',
+        canonical: '/404',
+      },
+    },
   ],
 })
 
@@ -45,6 +93,17 @@ router.beforeEach(async (to, from, next) => {
   if (to.meta.guestOnly && user) {
     return next({ name: 'dashboard' })
   }
+
+  document.title = String(to.meta.title || 'AutoTracker')
+  const description = document.querySelector('meta[name="description"]') || document.createElement('meta')
+  description.setAttribute('name', 'description')
+  description.setAttribute('content', String(to.meta.description || 'Track your online orders with AutoTracker.'))
+  document.head.appendChild(description)
+
+  const canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link')
+  canonical.setAttribute('rel', 'canonical')
+  canonical.setAttribute('href', new URL(String(to.meta.canonical || to.fullPath), window.location.origin).href)
+  document.head.appendChild(canonical)
 
   // Public routes (landing page)
   return next()
