@@ -62,4 +62,19 @@ export class AuthService {
     }
     return this.userMapper.supabaseUserToAppUser(data.user)
   }
+
+  /**
+   * Gets the last sync time for the current user
+   * @returns {Promise<string>} Promise of the last sync
+   * @author Oriol Plazas León
+   * @since 17/09/2026
+   * @throws Error if there supabase returns an error
+   */
+  public async getLastSyncTime(): Promise<string> {
+    const { data, error } = await this.supabase.from('sync_state').select('last_synced_at').single()
+    if (error) {
+      throw new Error(error?.message || 'No sync detected')
+    }
+    return data.last_synced_at
+  }
 }
