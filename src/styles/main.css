@@ -69,6 +69,32 @@
     --color-warning-soft: #FBEADF;
     --color-danger: #DC2626;
     --color-danger-soft: #FCEAEA;
+
+    /* ---------- Element Plus adapted colors ---------- */
+    --el-color-primary: var(--color-accent);
+    --el-color-success: var(--color-success);
+    --el-color-warning: var(--color-warning);
+    --el-color-danger: var(--color-danger);
+    --el-color-error: var(--color-danger);
+    --el-color-info: var(--color-text-2);
+    --el-bg-color: var(--color-surface);
+    --el-bg-color-page: var(--color-bg);
+    --el-bg-color-overlay: var(--color-surface);
+    --el-text-color-primary: var(--color-text);
+    --el-text-color-regular: var(--color-text);
+    --el-text-color-secondary: var(--color-text-2);
+    --el-text-color-placeholder: var(--color-text-2);
+    --el-border-color: var(--color-border);
+    --el-border-color-light: var(--color-border);
+    --el-border-color-lighter: var(--color-border);
+    --el-border-radius-base: var(--radius-sm);
+    --el-border-radius-small: var(--radius-sm);
+    --el-border-radius-round: var(--radius-lg);
+    --el-font-family: var(--font-sans);
+    --el-font-size-base: var(--fs-base);
+    --el-dropdown-menuItem-hover-fill: var(--color-surface-2);
+    --el-dropdown-menuItem-hover-color: var(--color-text);
+    --el-color-primary-light-9: var(--color-surface-2);
 }
 
 /* ---------- Color — DARK ---------- */
@@ -239,4 +265,9 @@ label {
 .successMsg {
     font-weight: bold;
     color: var(--color-success);
+}
+
+
+.el-dropdown-menu__item {
+    font-size: var(--fs-xs);
 }
