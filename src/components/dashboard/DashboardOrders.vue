@@ -48,7 +48,7 @@ const isSortedBy = (key: SortKey) => sortKey.value === key
 <template>
     <main>
         <article class="text">
-            <h1>Orders</h1>
+            <h2>Orders</h2>
             <p v-if="!syncError">Last Synced: <span class="accent">{{ lastSync }}</span></p>
         </article>
 

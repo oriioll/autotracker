@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import RecentOrderCard from './RecentOrderCard.vue';
 import type { AppOrder } from '@/types/AppOrder.ts'
 
 const props = defineProps<{
     orders: AppOrder[]
-    lastSync: string
-    syncError: boolean
 }>()
 
 const recentOrders = computed(() => {
@@ -30,8 +29,15 @@ const recentOrders = computed(() => {
 <template>
     <main>
         <article class="text">
-            <h1>Upcoming deliveries</h1>
+            <h2>Upcoming deliveries</h2>
+            <span>Next 7 days</span>
         </article>
+        <section class="table" v-if="recentOrders.length > 0">
+            <RecentOrderCard v-for="order in recentOrders" :key="order.id" :order="order" />
+        </section>
+        <section v-else>
+            <p>You don't have any orders expected in the next 7 days.</p>
+        </section>
     </main>
 </template>
 <style scoped>
@@ -58,9 +64,10 @@ main {
 
 .table {
     width: 100%;
+    padding: 1rem 0;
     overflow-x: auto;
-    border-radius: 4px;
-    border: solid 2px var(--color-border);
-    background: var(--color-surface);
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
 }
 </style>
