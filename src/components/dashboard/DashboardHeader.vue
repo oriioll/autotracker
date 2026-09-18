@@ -69,6 +69,8 @@ header {
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    background: var(--color-bg);
+    z-index: 900;
 }
 
 header a {
