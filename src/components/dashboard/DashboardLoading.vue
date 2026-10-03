@@ -31,7 +31,7 @@ onUnmounted(() => {
         <div class="loading-content">
 
             <div class="brand">
-                <img src="/public/logo-autotracker.webp" alt="Logo Autotracker">
+                <img src="/logo-autotracker.webp" alt="Logo Autotracker">
                 <h3 class="brand-name">Auto<span class="accent">Tracker</span></h3>
             </div>
 

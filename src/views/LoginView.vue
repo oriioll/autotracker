@@ -48,8 +48,8 @@ const handleGoogleLogin = async () => {
             </div>
             <p class="login-terms">
                 By continuing, you agree to our
-                <a href="#">Terms</a> and
-                <a href="#">Privacy Policy</a>.
+                <router-link to="/terms">Terms</router-link> and
+                <router-link to="/privacy">Privacy Policy</router-link>.
             </p>
         </div>
     </main>
