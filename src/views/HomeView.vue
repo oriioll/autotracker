@@ -607,6 +607,10 @@ const handleLogout = async () => {
 }
 
 @media (max-width: 720px) {
+    .preview-cards .mini-card:nth-child(n + 2) {
+        display: none;
+    }
+
     .steps {
         grid-template-columns: 1fr;
     }

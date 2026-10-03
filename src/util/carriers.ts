@@ -173,6 +173,19 @@ export const CARRIERS: Company[] = [
   },
 ]
 
+const carrierLogoUrls = import.meta.glob<string>('../assets/carriers/*.svg', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+})
+
+CARRIERS.forEach((carrier) => {
+  if (carrier.svg) {
+    const filename = carrier.svg.split('/').pop()
+    carrier.svg = filename ? carrierLogoUrls[`../assets/carriers/${filename}`] ?? null : null
+  }
+})
+
 /**
  * Gets the data of a carrier if its recopilated
  * @param carrierName The name of the carrier to find

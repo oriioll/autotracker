@@ -279,17 +279,42 @@ a.party:hover strong {
 
 @media (max-width: 560px) {
     .dialog-backdrop {
-        padding: .75rem;
+        padding: .5rem;
     }
 
     .dialog {
-        max-height: calc(100dvh - 1.5rem);
-        padding: 1.5rem;
+        max-height: calc(100dvh - 1rem);
+        padding: 1rem;
     }
 
-    .parties,
+    .parties {
+        grid-template-columns: 1fr 1fr;
+        gap: .5rem;
+        margin: 1rem 0 .75rem;
+        padding: .65rem 0;
+    }
+
+    .party {
+        gap: .5rem;
+    }
+
+    .party__logo {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+    }
+
     .details {
-        grid-template-columns: 1fr;
+        gap: .5rem;
+    }
+
+    .detail {
+        padding: .55rem;
+    }
+
+    .dialog__footer {
+        margin-top: .85rem;
+        padding-top: .65rem;
     }
 }
 </style>

@@ -494,6 +494,19 @@ export const COMPANIES: Company[] = [
   },
 ]
 
+const companyLogoUrls = import.meta.glob<string>('../assets/companies/*.svg', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+})
+
+COMPANIES.forEach((company) => {
+  if (company.svg) {
+    const filename = company.svg.split('/').pop()
+    company.svg = filename ? companyLogoUrls[`../assets/companies/${filename}`] ?? null : null
+  }
+})
+
 /**
  * Gets the data of a company if its recopilated
  * @param companyName The name of the company to find

@@ -108,5 +108,10 @@ h1 {
     .document-nav {
         flex-direction: column;
     }
+
+    .document-content p {
+        font-size: var(--fs-sm);
+        line-height: 1.5;
+    }
 }
 </style>

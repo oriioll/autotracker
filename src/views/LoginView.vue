@@ -108,4 +108,22 @@ main {
     top: 40px;
     right: 40px;
 }
+
+.login-terms {
+    max-width: 100%;
+    font-size: var(--fs-xs);
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .login {
+        gap: 1.25rem;
+        padding: 1.5rem .75rem;
+    }
+
+    .themeToggle {
+        top: 1rem;
+        right: 1rem;
+    }
+}
 </style>
