@@ -1,4 +1,4 @@
-import type { SupabaseClient } from '@supabase/supabase-js'
+import { type SupabaseClient, FunctionsHttpError } from '@supabase/supabase-js'
 import { supabase } from '../supabase/supabase'
 import type { AppOrder } from '@/types/AppOrder'
 import { AuthService } from './auth.service'
@@ -73,14 +73,19 @@ export class OrderService {
    * @throws Error if cannot load supabase invoke sync-gmail function
    */
   public async syncGmail(): Promise<void> {
-    /**
-     * Supabase invoke sync-gmail functions reads all the new mails since the lasts syncronization
-     * and if it finds any new order Upserts into database
-     */
-    const { error } = await this.supabase.functions.invoke('sync-gmail')
-    if (error) {
-      console.log(error)
-      throw new Error(error.message)
-    }
+    let data
+    do {
+      const res = await this.supabase.functions.invoke('sync-gmail')
+      if (res.error) {
+        // FunctionsHttpError hides our { error } body inside context (a Response)
+        if (res.error instanceof FunctionsHttpError) {
+          //Throw error properly with the error message from the function
+          const body = await res.error.context.json().catch(() => null)
+          throw new Error(body?.error ?? res.error.message)
+        }
+        throw new Error(res.error.message)
+      }
+      data = res.data
+    } while (data.remaining > 0 && data.processed > 0)
   }
 }
