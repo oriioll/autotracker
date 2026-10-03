@@ -1,8 +1,8 @@
 <template>
     <main class="document-page">
         <nav class="document-nav" aria-label="Legal navigation">
-            <a href="/">AutoTracker</a>
-            <span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span>
+            <router-link to="/">AutoTracker</router-link>
+            <span><router-link to="/privacy">Privacy</router-link> · <router-link to="/terms">Terms</router-link></span>
         </nav>
         <header class="document-header">
             <p class="eyebrow">Legal</p>
@@ -31,8 +31,8 @@
             <p>Connected services, such as an email provider used for synchronization, may set or process identifiers
                 under their own policies. Review those providers' information when connecting an account.</p>
             <h2>5. More information</h2>
-            <p>For details about personal data and your rights under the GDPR and Spanish law, see our <a
-                    href="/privacy">Privacy Policy</a>.</p>
+                <p>For details about personal data and your rights under the GDPR and Spanish law, see our <router-link
+                    to="/privacy">Privacy Policy</router-link>.</p>
         </article>
     </main>
 </template>

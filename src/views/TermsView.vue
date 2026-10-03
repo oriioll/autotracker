@@ -1,8 +1,8 @@
 <template>
     <main class="document-page">
         <nav class="document-nav" aria-label="Legal navigation">
-            <a href="/">AutoTracker</a>
-            <span><a href="/privacy">Privacy</a> · <a href="/cookies">Cookies</a></span>
+            <router-link to="/">AutoTracker</router-link>
+            <span><router-link to="/privacy">Privacy</router-link> · <router-link to="/cookies">Cookies</router-link></span>
         </nav>
         <header class="document-header">
             <p class="eyebrow">Legal</p>
@@ -19,7 +19,7 @@
             <h2>2. Accounts and connected services</h2>
             <p>You are responsible for keeping your account secure and for the activity carried out through it. When you
                 connect an email account, you authorize AutoTracker to process the messages and data necessary to
-                provide the requested order-tracking features, subject to the <a href="/privacy">Privacy Policy</a>.</p>
+                provide the requested order-tracking features, subject to the <router-link to="/privacy">Privacy Policy</router-link>.</p>
             <h2>3. Acceptable use</h2>
             <p>You must use AutoTracker lawfully and must not attempt to disrupt the service, access another person's
                 account, reverse engineer it, or use it to process data without an appropriate legal basis.</p>

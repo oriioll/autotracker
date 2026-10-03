@@ -4,7 +4,7 @@
         <h1>404</h1>
         <h2>Page not found</h2>
         <p>The page you requested does not exist or has moved.</p>
-        <a class="action-link" href="/">Go to the start</a>
+        <router-link class="action-link" to="/">Go to the start</router-link>
     </main>
 </template>
 

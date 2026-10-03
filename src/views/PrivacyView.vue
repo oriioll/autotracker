@@ -1,8 +1,8 @@
 <template>
     <main class="document-page">
         <nav class="document-nav" aria-label="Legal navigation">
-            <a href="/">AutoTracker</a>
-            <span><a href="/terms">Terms</a> · <a href="/cookies">Cookies</a></span>
+            <router-link to="/">AutoTracker</router-link>
+            <span><router-link to="/terms">Terms</router-link> · <router-link to="/cookies">Cookies</router-link></span>
         </nav>
         <header class="document-header">
             <p class="eyebrow">Legal</p>
