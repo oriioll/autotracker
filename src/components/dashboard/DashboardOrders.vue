@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { AppOrder } from '@/types/AppOrder.ts';
 import DashboardOrderRow from './DashboardOrderRow.vue';
-import { computed, ref, type Ref } from 'vue';
+import { computed, ref, type Ref, watch } from 'vue';
 const props = defineProps<{
     orders: AppOrder[],
     lastSync: string,
@@ -10,6 +10,8 @@ const props = defineProps<{
 type SortKey = 'company' | 'merchant' | 'trackingNumber' | 'carrier' | 'status' | 'estimatedDelivery' | 'total'
 const sortKey: Ref<SortKey | null> = ref(null)
 const sortDirection: Ref<'asc' | 'desc'> = ref('desc')
+const currentPage: Ref<number> = ref(1)
+const PAGE_SIZE = 10
 
 const sortedOrders = computed(() => {
     if (!sortKey.value) return props.orders
@@ -29,6 +31,16 @@ const sortedOrders = computed(() => {
         }
         return sortDirection.value === 'asc' ? comparison : -comparison
     })
+})
+
+const pageCount = computed(() => Math.ceil(sortedOrders.value.length / PAGE_SIZE))
+const paginatedOrders = computed(() => {
+    const start = (currentPage.value - 1) * PAGE_SIZE
+    return sortedOrders.value.slice(start, start + PAGE_SIZE)
+})
+
+watch(pageCount, (totalPages) => {
+    currentPage.value = Math.min(currentPage.value, Math.max(totalPages, 1))
 })
 
 const sortOrders = (key: SortKey) => {
@@ -113,12 +125,24 @@ const isSortedBy = (key: SortKey) => sortKey.value === key
                     </svg>
                 </button>
             </article>
-            <DashboardOrderRow v-for="order in sortedOrders" :key="order.id" :order="order" />
+            <DashboardOrderRow v-for="order in paginatedOrders" :key="order.id" :order="order" />
         </section>
         <section v-else class="table empty">
             <h4>No orders yet</h4>
             <p>Your tracked orders will appear here once they’re synced from Gmail.</p>
         </section>
+        <nav v-if="pageCount > 1" class="pagination" aria-label="Orders pages">
+            <button type="button" class="pagination__button" :disabled="currentPage === 1" @click="currentPage--">
+                Previous
+            </button>
+            <span class="pagination__status" aria-live="polite">
+                Page {{ currentPage }} of {{ pageCount }}
+            </span>
+            <button type="button" class="pagination__button" :disabled="currentPage === pageCount"
+                @click="currentPage++">
+                Next
+            </button>
+        </nav>
     </main>
 </template>
 <style scoped>
@@ -159,6 +183,69 @@ main {
     align-items: center;
     gap: .5rem;
     padding: 4rem;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.pagination__status {
+    min-width: 90px;
+    color: var(--color-text-2);
+    font-size: var(--fs-sm);
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.pagination__button {
+    min-width: 88px;
+    min-height: 40px;
+    padding: .5rem .75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .18s ease, border-color .18s ease, color .18s ease,
+        transform 120ms var(--ease-out);
+}
+
+.pagination__button:active:not(:disabled) {
+    transform: scale(.97);
+}
+
+.pagination__button:disabled {
+    color: var(--color-text-2);
+    cursor: not-allowed;
+    opacity: .55;
+}
+
+.pagination__button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .pagination__button:hover:not(:disabled) {
+        border-color: var(--color-accent);
+        background: var(--color-surface-2);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pagination__button {
+        transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+    }
+
+    .pagination__button:active:not(:disabled) {
+        transform: none;
+    }
 }
 
 .table__header {
@@ -256,6 +343,15 @@ main {
 
     .table__header button {
         font-size: var(--fs-xs);
+    }
+
+    .pagination {
+        justify-content: space-between;
+        gap: .5rem;
+    }
+
+    .pagination__button {
+        min-width: 76px;
     }
 }
 </style>
