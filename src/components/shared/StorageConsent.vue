@@ -54,7 +54,7 @@ const choose = (choice: OptionalStorageChoice) => {
 <style scoped>
 .storage-consent {
     position: fixed;
-    right: max(12px, env(safe-area-inset-right));
+    left: max(12px, env(safe-area-inset-right));
     bottom: max(12px, env(safe-area-inset-bottom));
     z-index: 1100;
     color: var(--color-text);
@@ -71,7 +71,7 @@ const choose = (choice: OptionalStorageChoice) => {
     background: var(--color-surface);
     color: var(--color-text);
     box-shadow: 0 8px 28px rgb(0 0 0 / 18%);
-    animation: consent-enter .2s ease-out both;
+    animation: consent-enter 200ms var(--ease-out) both;
 }
 
 .storage-consent__card h2 {
@@ -96,20 +96,11 @@ const choose = (choice: OptionalStorageChoice) => {
     transition: border-color .18s ease, background-color .18s ease;
 }
 
-.storage-consent__close:hover {
-    border-color: var(--color-accent);
-    background: var(--color-accent-soft);
-}
-
 .storage-consent__close svg {
     width: 18px;
     height: 18px;
     fill: currentColor;
-    transition: transform .18s ease;
-}
-
-.storage-consent__close:hover svg {
-    transform: rotate(90deg);
+    transition: transform 180ms ease-in-out;
 }
 
 .storage-consent__description {
@@ -174,8 +165,9 @@ const choose = (choice: OptionalStorageChoice) => {
 }
 
 .storage-consent__button:active {
-    transform: translateY(0) scale(.98);
+    transform: scale(.97);
     box-shadow: none;
+    transition: transform 120ms var(--ease-out);
 }
 
 .storage-consent__button:focus-visible,
@@ -206,7 +198,39 @@ const choose = (choice: OptionalStorageChoice) => {
 }
 
 .storage-consent__launcher:active {
-    transform: translateY(0) scale(.98);
+    transform: scale(.97);
+    transition: transform 120ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .storage-consent__close:hover {
+        border-color: var(--color-accent);
+        background: var(--color-accent-soft);
+    }
+
+    .storage-consent__close:hover svg {
+        transform: rotate(90deg);
+    }
+
+    .storage-consent__button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgb(0 0 0 / 12%);
+    }
+
+    .storage-consent__button--secondary:hover {
+        border-color: var(--color-accent);
+        background: var(--color-surface-2);
+    }
+
+    .storage-consent__button--primary:hover {
+        border-color: var(--color-text);
+    }
+
+    .storage-consent__launcher:hover {
+        transform: translateY(-2px);
+        border-color: var(--color-accent);
+        background: var(--color-surface-2);
+    }
 }
 
 @media (max-width: 520px) {
@@ -221,14 +245,25 @@ const choose = (choice: OptionalStorageChoice) => {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .storage-consent__card {
+        animation-name: consent-fade;
+        animation-duration: 120ms;
+    }
 
     .storage-consent__button,
     .storage-consent__launcher,
-    .storage-consent__close,
-    .storage-consent__close svg,
-    .storage-consent__card {
-        transition: none;
-        animation: none;
+    .storage-consent__close {
+        transition-property: background-color, border-color, color;
+        transition-duration: 120ms;
+    }
+
+    .storage-consent__button:active,
+    .storage-consent__launcher:active {
+        transform: none;
+    }
+
+    .storage-consent__close:hover svg {
+        transform: none;
     }
 }
 
@@ -241,6 +276,16 @@ const choose = (choice: OptionalStorageChoice) => {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes consent-fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
 </style>

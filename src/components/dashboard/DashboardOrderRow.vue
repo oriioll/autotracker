@@ -19,8 +19,10 @@ onBeforeMount(() => {
 })
 </script>
 <template>
-    <OrderDialog v-if="showDialog" :order="props.order" :company="company" :carrier="carrier"
-        @close="showDialog = false" />
+    <Transition name="order-dialog">
+        <OrderDialog v-if="showDialog" :order="props.order" :company="company" :carrier="carrier"
+            @close="showDialog = false" />
+    </Transition>
     <article @click="showDialog = true" class="row">
         <div class="company column--company">
             <a v-if="company" class="company__logo" :href="company.website" target="_blank" rel="noreferrer">
@@ -61,11 +63,13 @@ onBeforeMount(() => {
     gap: 1rem;
     border-top: 1px solid var(--color-border);
     background: var(--color-surface);
-    transition: background-color .2s ease;
+    transition: background-color 180ms ease;
 }
 
-.row:hover {
-    background: var(--color-surface-2);
+@media (hover: hover) and (pointer: fine) {
+    .row:hover {
+        background: var(--color-surface-2);
+    }
 }
 
 .company {

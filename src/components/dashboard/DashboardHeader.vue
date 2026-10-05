@@ -101,21 +101,6 @@ aside img {
 }
 
 .avatar-skeleton {
-    background: linear-gradient(100deg,
-            var(--color-surface-2) 35%,
-            var(--color-border) 50%,
-            var(--color-surface-2) 65%);
-    background-size: 300% 100%;
-    animation: avatar-skeleton-shimmer 1.8s ease-in-out infinite;
-}
-
-@keyframes avatar-skeleton-shimmer {
-    0% {
-        background-position: 100% 0;
-    }
-
-    100% {
-        background-position: -100% 0;
-    }
+    background: var(--color-surface-2);
 }
 </style>

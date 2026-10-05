@@ -107,6 +107,27 @@ const emit = defineEmits(['close'])
     background: rgba(26, 23, 18, 0.932);
 }
 
+:global(.order-dialog-enter-active),
+:global(.order-dialog-leave-active) {
+    transition: opacity 220ms var(--ease-out);
+}
+
+:global(.order-dialog-enter-active) .dialog,
+:global(.order-dialog-leave-active) .dialog {
+    transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out);
+}
+
+:global(.order-dialog-enter-from),
+:global(.order-dialog-leave-to) {
+    opacity: 0;
+}
+
+:global(.order-dialog-enter-from) .dialog,
+:global(.order-dialog-leave-to) .dialog {
+    opacity: 0;
+    transform: translateY(8px) scale(.97);
+}
+
 .dialog {
     position: relative;
     width: min(560px, 100%);
@@ -117,6 +138,20 @@ const emit = defineEmits(['close'])
     border-radius: var(--radius-md);
     background: var(--color-surface);
     color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :global(.order-dialog-enter-active),
+    :global(.order-dialog-leave-active),
+    :global(.order-dialog-enter-active) .dialog,
+    :global(.order-dialog-leave-active) .dialog {
+        transition-duration: 120ms;
+    }
+
+    :global(.order-dialog-enter-from) .dialog,
+    :global(.order-dialog-leave-to) .dialog {
+        transform: none;
+    }
 }
 
 .dialog__close {

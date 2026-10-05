@@ -19,8 +19,10 @@ onBeforeMount(() => {
 })
 </script>
 <template>
-    <OrderDialog v-if="showDialog" :order="props.order" :company="company" :carrier="carrier"
-        @close="showDialog = false" />
+    <Transition name="order-dialog">
+        <OrderDialog v-if="showDialog" :order="props.order" :company="company" :carrier="carrier"
+            @close="showDialog = false" />
+    </Transition>
     <article @click="showDialog = true" class="card">
         <div class="card__identity">
             <a v-if="company" class="company__logo" :href="company.website" target="_blank" rel="noreferrer"
@@ -58,13 +60,15 @@ onBeforeMount(() => {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     background: var(--color-surface);
-    transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
+    transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease-in-out;
 }
 
-.card:hover {
-    border-color: var(--color-accent);
-    background: var(--color-surface-2);
-    transform: translateY(-1px);
+@media (hover: hover) and (pointer: fine) {
+    .card:hover {
+        border-color: var(--color-accent);
+        background: var(--color-surface-2);
+        transform: translateY(-1px);
+    }
 }
 
 .card__identity,

@@ -169,6 +169,13 @@ img {
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .loading-indicator span {
+        animation: none;
+        transform: translateX(60%);
+    }
+}
+
 @media (max-width: 600px) {
     .brand {
         top: 24px;
