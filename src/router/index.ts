@@ -14,10 +14,6 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: { name: 'Home' },
-    },
-    {
-      path: '/home',
       name: 'Home',
       component: HomeView,
       meta: {
@@ -25,8 +21,12 @@ const router = createRouter({
         title: 'AutoTracker | Track every order automatically',
         description:
           'AutoTracker finds your orders and shipments in Gmail, so you can track every delivery in one place.',
-        canonical: '/home',
+        canonical: '/',
       },
+    },
+    {
+      path: '/home',
+      redirect: { name: 'Home' },
     },
     {
       path: '/login',
@@ -37,6 +37,7 @@ const router = createRouter({
         title: 'Sign in | AutoTracker',
         description: 'Sign in to AutoTracker to manage and track your online orders.',
         canonical: '/login',
+        robots: 'noindex, follow',
       },
     },
     {
@@ -48,6 +49,7 @@ const router = createRouter({
         title: 'Orders dashboard | AutoTracker',
         description: 'View and organize your online orders in the AutoTracker dashboard.',
         canonical: '/dashboard',
+        robots: 'noindex, nofollow',
       },
     },
     {
@@ -89,6 +91,7 @@ const router = createRouter({
         title: 'Page not found | AutoTracker',
         description: 'The requested AutoTracker page could not be found.',
         canonical: '/404',
+        robots: 'noindex, follow',
       },
     },
   ],
@@ -121,6 +124,11 @@ router.beforeEach(async (to, from, next) => {
     String(to.meta.description || 'Track your online orders with AutoTracker.'),
   )
   document.head.appendChild(description)
+
+  const robots = document.querySelector('meta[name="robots"]') || document.createElement('meta')
+  robots.setAttribute('name', 'robots')
+  robots.setAttribute('content', String(to.meta.robots || 'index, follow'))
+  document.head.appendChild(robots)
 
   const socialMeta = [
     ['property', 'og:title', to.meta.title || 'AutoTracker'],

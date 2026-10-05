@@ -25,7 +25,7 @@ onBeforeMount(() => {
         <div class="card__identity">
             <a v-if="company" class="company__logo" :href="company.website" target="_blank" rel="noreferrer"
                 @click.stop>
-                <img v-if="company.svg" :src="company.svg" :alt="company.name">
+                <img v-if="company.svg" :src="company.svg" :alt="`${company.name} logo`">
                 <span v-else>{{ company.name[0]?.toUpperCase() || '-' }}</span>
             </a>
             <span v-else class="company__logo companyUppercase">{{ props.order.company[0]?.toUpperCase() || '-'

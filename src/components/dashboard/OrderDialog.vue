@@ -32,7 +32,7 @@ const emit = defineEmits(['close'])
                 <a v-if="company?.website" class="party" :href="company.website" target="_blank" rel="noreferrer"
                     @click.stop>
                     <span class="party__logo">
-                        <img v-if="company.svg" :src="company.svg" :alt="company.name">
+                        <img v-if="company.svg" :src="company.svg" :alt="`${company.name} logo`">
                         <span v-else>{{ company.name[0]?.toUpperCase() || '-' }}</span>
                     </span>
                     <span>
@@ -51,7 +51,7 @@ const emit = defineEmits(['close'])
                 <a v-if="carrier?.website" class="party" :href="carrier.website" target="_blank" rel="noreferrer"
                     @click.stop>
                     <span class="party__logo">
-                        <img v-if="carrier.svg" :src="carrier.svg" :alt="carrier.name">
+                        <img v-if="carrier.svg" :src="carrier.svg" :alt="`${carrier.name} logo`">
                         <span v-else>{{ carrier.name[0]?.toUpperCase() || '-' }}</span>
                     </span>
                     <span>

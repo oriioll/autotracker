@@ -59,7 +59,49 @@ onMounted(() => {
 <template>
     <DashboardLoading v-if="ordersLoading" />
     <DashboardHeader />
+    <main v-if="ordersError" class="error-state" role="alert">
+        <h1>We couldn't load your orders</h1>
+        <p>{{ ordersErrorMsg }}</p>
+        <button type="button" class="retry-button" :disabled="ordersLoading" @click="getUserOrders">
+            Try again
+        </button>
+    </main>
     <RecentOrders v-if="!ordersLoading && !ordersError" :orders="ORDERS" />
     <DashboardOrders v-if="!ordersLoading && !ordersError" :orders="ORDERS" :sync-error="syncError"
         :last-sync="lastSync" />
 </template>
+
+<style scoped>
+.error-state {
+    width: min(560px, calc(100% - 2rem));
+    min-height: 50vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--color-text);
+}
+
+.error-state p {
+    color: var(--color-text-2);
+}
+
+.retry-button {
+    min-height: 44px;
+    padding: .65rem 1rem;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.retry-button:disabled {
+    cursor: wait;
+    opacity: .65;
+}
+</style>

@@ -24,7 +24,7 @@ onBeforeMount(() => {
     <article @click="showDialog = true" class="row">
         <div class="company column--company">
             <a v-if="company" class="company__logo" :href="company.website" target="_blank" rel="noreferrer">
-                <img v-if="company.svg" :src="company.svg" :alt="company.name">
+                <img v-if="company.svg" :src="company.svg" :alt="`${company.name} logo`">
                 <span v-else>{{ company.name[0]?.toUpperCase() || '-' }}</span>
             </a>
             <span v-else class="company__logo companyUppercase">{{ props.order.company[0]?.toUpperCase() || '-'
@@ -35,7 +35,7 @@ onBeforeMount(() => {
         <span class="cell cell--tracking column--tracking">{{ props.order.trackingNumber || '-' }}</span>
         <div class="company column--carrier">
             <a v-if="carrier" class="company__logo" :href="carrier.website" target="_blank" rel="noreferrer">
-                <img v-if="carrier.svg" :src="carrier.svg" :alt="carrier.name">
+                <img v-if="carrier.svg" :src="carrier.svg" :alt="`${carrier.name} logo`">
                 <span v-else>{{ carrier.name[0]?.toUpperCase() || '-' }}</span>
             </a>
             <span v-else class="company__logo companyUppercase">{{ props.order.carrier?.[0]?.toUpperCase() || '-'

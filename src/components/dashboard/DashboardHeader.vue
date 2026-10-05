@@ -42,7 +42,7 @@ const handleLogout = async () => {
         <aside>
             <ThemeToggle />
             <el-dropdown v-if="!isLoading" trigger="click" @command="handleLogout">
-                <img class="avatar" :src="userAvatar" alt="User avatar">
+                <img class="avatar" :src="userAvatar" alt="Your Google profile picture">
                 <template #dropdown>
                     <el-dropdown-menu>
                         <el-dropdown-item command="logout"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -54,7 +54,7 @@ const handleLogout = async () => {
                 </template>
             </el-dropdown>
             <img v-else class="avatar-skeleton" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                alt="Loading user avatar">
+                alt="" aria-hidden="true">
 
         </aside>
     </header>

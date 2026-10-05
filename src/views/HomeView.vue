@@ -25,8 +25,12 @@ onMounted(async () => {
     }
 })
 
-function goToLogin() {
+const goToLogin = () => {
     router.push('/login')
+}
+
+const goToDashboard = () => {
+    router.push('/dashboard')
 }
 
 /**
@@ -42,6 +46,37 @@ const handleLogout = async () => {
         console.log(e)
     }
 }
+//FAQS ARRAY with all the FaQs and answers for the landing page
+const faqs: { question: string; answer: string }[] = [
+    {
+        question: 'What does AutoTracker read in my inbox?',
+        answer: 'Only the subject, the sender and a short preview of each email, never the full message or attachments. The first sync covers the last 6 months; after that, only new emails are checked.'
+    },
+    {
+        question: 'Can AutoTracker send, delete or change my emails?',
+        answer: 'No. It only requests read-only access to your Gmail and never sends, deletes or modifies anything.'
+    },
+    {
+        question: 'What data do you store?',
+        answer: 'Only the order details we extract: store, order number, total, tracking number, carrier, status and estimated delivery. We don\'t keep the contents of your emails. We also store the authorization token Google gives us so we can keep syncing.'
+    },
+    {
+        question: 'How does the AI part work?',
+        answer: 'Emails that look order-related (confirmations, shipping updates, receipts) are sent to Google\'s Gemini AI, which decides whether it\'s a real order and extracts the details. Emails that don\'t look order-related are never sent to the AI.'
+    },
+    {
+        question: 'When does it sync?',
+        answer: 'Every time you open your dashboard, AutoTracker checks for emails received since the last sync and updates your orders.'
+    },
+    {
+        question: 'Which stores, carriers and languages are supported?',
+        answer: 'Any store or carrier. Order emails in Spanish, Catalan, English, French, German, Italian and Portuguese are recognized, and emails from major carriers like Correos, SEUR, MRW, GLS, DHL, UPS and FedEx are picked up even when the subject is short.'
+    },
+    {
+        question: 'How can I revoke access or delete my data?',
+        answer: 'You can revoke AutoTracker\'s access at any time from the third-party access settings of your Google Account. To delete the data we store about you, email orimypro7@gmail.com and we\'ll remove it within 30 days.'
+    }
+]
 </script>
 
 <template>
@@ -55,10 +90,10 @@ const handleLogout = async () => {
                 <ThemeToggle />
 
                 <img v-if="isLoading" class="avatar-skeleton"
-                    src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Loading user avatar">
+                    src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" aria-hidden="true">
 
                 <el-dropdown v-else-if="isLoggedIn" trigger="click" @command="handleLogout">
-                    <img class="avatar" :src="userAvatar" alt="User avatar">
+                    <img class="avatar" :src="userAvatar" alt="Your Google profile picture">
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item command="logout">
@@ -159,8 +194,11 @@ const handleLogout = async () => {
                     purchases and shipments automatically, so you never have to dig
                     through your inbox to know where a package is.
                 </p>
-                <button class="btn-primary" @click="goToLogin">
+                <button v-if="!isLoggedIn" class="btn-primary" @click="goToLogin">
                     Connect with Google
+                </button>
+                <button v-else class="btn-primary" @click="goToDashboard">
+                    Go to Dashboard
                 </button>
                 <p class="hero-note">Read-only access. Revoke it anytime.</p>
             </div>
@@ -191,14 +229,32 @@ const handleLogout = async () => {
                 </div>
             </div>
         </section>
-
+        <!-- FAQ -->
+        <section class="faq">
+            <h2>Frequently asked questions</h2>
+            <div class="faq-list">
+                <details v-for="faq in faqs" :key="faq.question" class="faq-item">
+                    <summary>{{ faq.question }}</summary>
+                    <p>{{ faq.answer }}</p>
+                </details>
+            </div>
+            <p class="faq-note">Want the details? Read our <router-link to="/privacy">Privacy Policy</router-link>.</p>
+        </section>
         <!-- CTA final -->
         <section class="cta-final">
             <h2>Stop searching your inbox for orders.</h2>
-            <button class="btn-primary" @click="goToLogin">
+            <button v-if="!isLoggedIn" class="btn-primary" @click="goToLogin">
                 Connect with Google
             </button>
+            <button v-else class="btn-primary" @click="goToDashboard">
+                Go to Dashboard
+            </button>
         </section>
+        <footer class="footer">
+            <router-link to="/privacy">Privacy</router-link> ·
+            <router-link to="/terms">Terms</router-link> ·
+            <router-link to="/cookies">Cookies</router-link>
+        </footer>
     </div>
 </template>
 
@@ -571,6 +627,87 @@ const handleLogout = async () => {
     line-height: var(--lh-body);
 }
 
+/* ---------- FAQ ---------- */
+.faq {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4rem 5%;
+}
+
+.faq h2 {
+    font-size: var(--fs-xl);
+    letter-spacing: var(--ls-tight);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.faq-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    transition: border-color .3s ease;
+}
+
+.faq-item:hover,
+.faq-item[open] {
+    border-color: var(--color-accent);
+}
+
+.faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    border-radius: var(--radius-sm);
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: '';
+    flex: 0 0 8px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--color-text-2);
+    border-bottom: 2px solid var(--color-text-2);
+    transform: rotate(45deg);
+    transition: transform .3s ease;
+}
+
+.faq-item[open] summary::after {
+    transform: rotate(-135deg);
+}
+
+.faq-item summary:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+.faq-item p {
+    padding: 0 1.5rem 1.25rem;
+    font-size: var(--fs-sm);
+    color: var(--color-text-2);
+}
+
+.faq-note {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: var(--fs-sm);
+    color: var(--color-text-2);
+}
+
 /* ---------- CTA final ---------- */
 .cta-final {
     text-align: center;
@@ -581,6 +718,14 @@ const handleLogout = async () => {
     font-size: var(--fs-xl);
     letter-spacing: var(--ls-tight);
     margin-bottom: 1.5rem;
+}
+
+.footer {
+    padding: 2rem 5%;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+    font-size: var(--fs-sm);
+    color: var(--color-text-2);
 }
 
 /* ---------- Responsive ---------- */

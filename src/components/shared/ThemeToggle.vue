@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import { getRememberedTheme, rememberTheme } from '@/services/storagePreferences'
 
 type Theme = 'light' | 'dark'
-
-const STORAGE_KEY = 'autotracker-theme'
 
 const theme = ref<Theme>('light')
 
@@ -15,7 +14,7 @@ const applyTheme = (newTheme: Theme) => {
 }
 
 const getDefaultTheme = (): Theme => {
-    const savedTheme = localStorage.getItem(STORAGE_KEY)
+    const savedTheme = getRememberedTheme()
 
     if (savedTheme === 'light' || savedTheme === 'dark') {
         return savedTheme
@@ -30,7 +29,7 @@ const toggleTheme = () => {
     const newTheme: Theme = isDark.value ? 'light' : 'dark'
 
     applyTheme(newTheme)
-    localStorage.setItem(STORAGE_KEY, newTheme)
+    rememberTheme(newTheme)
 }
 
 onMounted(() => {
