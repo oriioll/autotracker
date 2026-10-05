@@ -15,6 +15,59 @@ AutoTracker brings order and delivery information from Gmail into one dashboard.
 - Shows the order list, sortable by its displayed order attributes, and highlights deliveries expected in the next seven days.
 - Displays order, company, and carrier details where available.
 
+## UI mockups
+
+The `mockupsAutoTracker/` directory contains visual references for the main screens, including desktop and mobile layouts and light and dark themes. Expand a section to preview its mockups; select an image to open the original file.
+
+### Landing page
+
+<details>
+<summary>Landing page variations</summary>
+
+**Desktop — light theme**
+
+[![AutoTracker landing page in light theme](mockupsAutoTracker/home-light.png)](mockupsAutoTracker/home-light.png)
+
+**Desktop — dark theme**
+
+[![AutoTracker landing page in dark theme](mockupsAutoTracker/homeDark.png)](mockupsAutoTracker/homeDark.png)
+
+**Mobile — light theme**
+
+[![AutoTracker landing page on mobile in light theme](mockupsAutoTracker/home-light-mobile.png)](mockupsAutoTracker/home-light-mobile.png)
+
+</details>
+
+### Dashboard and order details
+
+<details>
+<summary>Dashboard and order detail views</summary>
+
+**Dashboard — dark theme**
+
+[![AutoTracker orders dashboard in dark theme](mockupsAutoTracker/dashboard-dark.png)](mockupsAutoTracker/dashboard-dark.png)
+
+**Order details — mobile, light theme**
+
+[![AutoTracker order details on mobile in light theme](mockupsAutoTracker/detail-light-mobile.png)](mockupsAutoTracker/detail-light-mobile.png)
+
+</details>
+
+### Sign-in and FAQ
+
+<details>
+<summary>Sign-in and frequently asked questions</summary>
+
+**Sign-in — dark theme**
+
+[![AutoTracker sign-in screen in dark theme](mockupsAutoTracker/login-dark.png)](mockupsAutoTracker/login-dark.png)
+
+**FAQ — dark theme**
+
+[![AutoTracker frequently asked questions in dark theme](mockupsAutoTracker/faq-dark.png)](mockupsAutoTracker/faq-dark.png)
+
+</details>
+
 ## Synchronization flow
 
 ```mermaid
@@ -74,8 +127,8 @@ The dashboard's **Upcoming deliveries** section includes orders with an estimate
 
 | Route        | Page                           | Access                                                  |
 | ------------ | ------------------------------ | ------------------------------------------------------- |
-| `/`          | Redirects to the home page     | Public                                                  |
-| `/home`      | Product landing page           | Public                                                  |
+| `/`          | Product landing page           | Public                                                  |
+| `/home`      | Redirects to `/`               | Public                                                  |
 | `/login`     | Google sign-in                 | Guests; signed-in users are redirected to the dashboard |
 | `/dashboard` | Orders and upcoming deliveries | Requires authentication                                 |
 | `/terms`     | Terms of Service               | Public                                                  |
