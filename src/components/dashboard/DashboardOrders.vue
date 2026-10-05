@@ -150,9 +150,9 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 2rem;
+    gap: clamp(1rem, 3vw, 2rem);
     width: 100%;
-    padding: 2rem 5%;
+    padding: clamp(1.25rem, 3vw, 2rem) var(--page-gutter);
 }
 
 .accent {
@@ -176,13 +176,14 @@ main {
 }
 
 .empty {
-    height: 400px;
+    min-height: clamp(16rem, 40dvh, 25rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: .5rem;
-    padding: 4rem;
+    padding: clamp(1.5rem, 5vw, 4rem);
+    text-align: center;
 }
 
 .pagination {
@@ -202,7 +203,7 @@ main {
 
 .pagination__button {
     min-width: 88px;
-    min-height: 40px;
+    min-height: 44px;
     padding: .5rem .75rem;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
@@ -266,6 +267,7 @@ main {
 
 .table__header button {
     min-width: 0;
+    min-height: 44px;
     padding: 0;
     display: inline-flex;
     align-items: center;

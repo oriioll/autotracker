@@ -64,7 +64,8 @@ main {
     justify-content: center;
     align-items: center;
     gap: var(--sp-7);
-    padding: var(--sp-6) var(--sp-4);
+    padding: max(var(--sp-6), env(safe-area-inset-top)) max(var(--sp-4), env(safe-area-inset-right))
+        max(var(--sp-6), env(safe-area-inset-bottom)) max(var(--sp-4), env(safe-area-inset-left));
 }
 
 .text {
@@ -77,8 +78,7 @@ main {
     background-color: var(--color-surface);
     border: solid 2px var(--color-border);
     border-radius: var(--radius-md);
-    width: 800px;
-    max-width: 90%;
+    width: min(50rem, 100%);
     padding: 2rem 1rem;
 
     display: flex;
@@ -105,8 +105,8 @@ main {
 
 .themeToggle {
     position: absolute;
-    top: 40px;
-    right: 40px;
+    top: max(1rem, env(safe-area-inset-top));
+    right: max(1rem, env(safe-area-inset-right));
 }
 
 .login-terms {
@@ -122,8 +122,8 @@ main {
     }
 
     .themeToggle {
-        top: 1rem;
-        right: 1rem;
+        top: max(1rem, env(safe-area-inset-top));
+        right: max(1rem, env(safe-area-inset-right));
     }
 }
 </style>

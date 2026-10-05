@@ -11,9 +11,10 @@
 <style scoped>
 .document-page {
     width: min(760px, calc(100% - 2rem));
+    min-height: 100svh;
     min-height: 100dvh;
     margin: 0 auto;
-    padding: 5rem 0;
+    padding: max(2rem, env(safe-area-inset-top)) 0 max(2rem, env(safe-area-inset-bottom));
     color: var(--color-text);
 }
 
@@ -50,6 +51,9 @@ h2 {
 
 .action-link {
     margin-top: 1.5rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
     padding: .7rem 1rem;
     border-radius: var(--radius-sm);
     background: var(--color-accent);

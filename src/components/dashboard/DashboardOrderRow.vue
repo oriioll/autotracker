@@ -30,7 +30,7 @@ onBeforeMount(() => {
                 <span v-else>{{ company.name[0]?.toUpperCase() || '-' }}</span>
             </a>
             <span v-else class="company__logo companyUppercase">{{ props.order.company[0]?.toUpperCase() || '-'
-                }}</span>
+            }}</span>
             <span class="company__name">{{ props.order.company || '-' }}</span>
         </div>
         <span class="cell column--merchant">{{ props.order.merchant || '-' }}</span>
@@ -41,7 +41,7 @@ onBeforeMount(() => {
                 <span v-else>{{ carrier.name[0]?.toUpperCase() || '-' }}</span>
             </a>
             <span v-else class="company__logo companyUppercase">{{ props.order.carrier?.[0]?.toUpperCase() || '-'
-                }}</span>
+            }}</span>
             <span class="company__name">{{ props.order.carrier || '-' }}</span>
         </div>
         <span class="cell status column--status">{{ props.order.status || '-' }}</span>
@@ -80,9 +80,9 @@ onBeforeMount(() => {
 }
 
 .company__logo {
-    width: 35px;
-    height: 35px;
-    flex: 0 0 35px;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
     display: grid;
     place-items: center;
     overflow: hidden;
@@ -163,9 +163,9 @@ onBeforeMount(() => {
     }
 
     .company__logo {
-        width: 32px;
-        height: 32px;
-        flex-basis: 32px;
+        width: 44px;
+        height: 44px;
+        flex-basis: 44px;
     }
 }
 

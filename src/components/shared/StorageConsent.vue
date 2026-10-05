@@ -54,7 +54,8 @@ const choose = (choice: OptionalStorageChoice) => {
 <style scoped>
 .storage-consent {
     position: fixed;
-    left: max(12px, env(safe-area-inset-right));
+    right: max(12px, env(safe-area-inset-right));
+    left: max(12px, env(safe-area-inset-left));
     bottom: max(12px, env(safe-area-inset-bottom));
     z-index: 1100;
     color: var(--color-text);
@@ -62,7 +63,7 @@ const choose = (choice: OptionalStorageChoice) => {
 
 .storage-consent__card {
     position: relative;
-    width: min(360px, calc(100vw - 24px));
+    width: min(22.5rem, calc(100dvw - 1.5rem));
     max-height: min(300px, calc(100dvh - 24px));
     overflow-y: auto;
     padding: 1rem;
@@ -84,8 +85,8 @@ const choose = (choice: OptionalStorageChoice) => {
     position: absolute;
     top: .65rem;
     right: .65rem;
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
     display: grid;
     place-items: center;
     border: 1px solid var(--color-border);
@@ -126,7 +127,7 @@ const choose = (choice: OptionalStorageChoice) => {
 
 .storage-consent__button {
     min-width: 0;
-    min-height: 40px;
+    min-height: 44px;
     padding: .5rem .65rem;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
@@ -178,7 +179,7 @@ const choose = (choice: OptionalStorageChoice) => {
 }
 
 .storage-consent__launcher {
-    min-height: 38px;
+    min-height: 44px;
     padding: .45rem .7rem;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
@@ -240,7 +241,7 @@ const choose = (choice: OptionalStorageChoice) => {
 
     .storage-consent__button {
         padding-inline: .4rem;
-        font-size: 11px;
+        font-size: var(--fs-xs);
     }
 }
 

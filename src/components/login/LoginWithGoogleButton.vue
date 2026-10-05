@@ -41,9 +41,8 @@ const props = defineProps<{ loginLoading: boolean }>()
 </template>
 <style scoped>
 .google-login-btn {
-    width: 400px;
-    max-width: 90%;
-    height: 48px;
+    width: min(25rem, 100%);
+    min-height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;

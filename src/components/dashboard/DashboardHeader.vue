@@ -53,8 +53,8 @@ const handleLogout = async () => {
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
-            <img v-else class="avatar-skeleton" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                alt="" aria-hidden="true">
+            <img v-else class="avatar-skeleton" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""
+                aria-hidden="true">
 
         </aside>
     </header>
@@ -65,7 +65,7 @@ header {
     top: 0;
     position: sticky;
     display: flex;
-    padding: 1rem 5%;
+    padding: max(1rem, env(safe-area-inset-top)) var(--page-gutter) 1rem;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
@@ -85,13 +85,13 @@ aside {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: clamp(.5rem, 2vw, 2rem);
 }
 
 aside img {
     border-radius: 50%;
-    height: 35px;
-    width: 35px;
+    height: 44px;
+    width: 44px;
     aspect-ratio: 1/1;
     object-fit: cover;
 }
@@ -102,5 +102,12 @@ aside img {
 
 .avatar-skeleton {
     background: var(--color-surface-2);
+}
+
+@media (max-width: 480px) {
+    header {
+        padding-right: max(var(--page-gutter), env(safe-area-inset-right));
+        padding-left: max(var(--page-gutter), env(safe-area-inset-left));
+    }
 }
 </style>

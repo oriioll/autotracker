@@ -103,7 +103,8 @@ const emit = defineEmits(['close'])
     z-index: 1000;
     display: grid;
     place-items: center;
-    padding: 1.5rem;
+    padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right))
+        max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
     background: rgba(26, 23, 18, 0.932);
 }
 
@@ -158,8 +159,8 @@ const emit = defineEmits(['close'])
     position: absolute;
     top: 1rem;
     right: 1rem;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     display: grid;
     place-items: center;
     border: 1px solid var(--color-border);
@@ -226,6 +227,7 @@ small {
 
 .party {
     min-width: 0;
+    min-height: 44px;
     display: flex;
     align-items: center;
     gap: .75rem;
@@ -314,7 +316,8 @@ a.party:hover strong {
 
 @media (max-width: 560px) {
     .dialog-backdrop {
-        padding: .5rem;
+        padding: max(.5rem, env(safe-area-inset-top)) max(.5rem, env(safe-area-inset-right))
+            max(.5rem, env(safe-area-inset-bottom)) max(.5rem, env(safe-area-inset-left));
     }
 
     .dialog {
@@ -334,9 +337,9 @@ a.party:hover strong {
     }
 
     .party__logo {
-        width: 34px;
-        height: 34px;
-        flex-basis: 34px;
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
     }
 
     .details {

@@ -59,26 +59,26 @@ onUnmounted(() => {
 .loading-screen {
     position: fixed;
     inset: 0;
-    width: 100dvw;
-    height: 100dvh;
+    min-height: 100dvh;
     z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--color-bg);
     color: var(--color-text);
-    overflow: hidden;
+    overflow-y: auto;
+    padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
 }
 
 .loading-content {
-    width: min(420px, calc(100% - 48px));
+    width: min(26.25rem, 100%);
     text-align: center;
 }
 
 .brand {
     position: absolute;
-    top: 32px;
-    left: 32px;
+    top: max(1rem, env(safe-area-inset-top));
+    left: max(1rem, env(safe-area-inset-left));
     display: flex;
     align-items: center;
     gap: 10px;
@@ -93,7 +93,7 @@ onUnmounted(() => {
     place-items: center;
     border: 1px solid var(--color-border);
     border-radius: 8px;
-    font-size: 13px;
+    font-size: var(--fs-xs);
     font-weight: 700;
     background: var(--color-surface);
 }
@@ -137,22 +137,24 @@ h1 {
 
 .loading-message {
     min-height: 24px;
-    margin: 12px 0 0;
+    margin: .75rem 0 0;
     color: var(--color-text-2);
-    font-size: 15px;
+    font-size: var(--fs-sm);
 }
 
 .loading-hint {
-    max-width: 360px;
-    margin: 28px auto 0;
+    max-width: 22.5rem;
+    margin: 1.75rem auto 0;
     color: var(--color-text-2);
-    font-size: 13px;
+    font-size: var(--fs-xs);
     line-height: 1.6;
 }
 
 img {
-    height: 50px;
-    width: 50px;
+    height: 3.125rem;
+    width: 3.125rem;
+    max-width: 100%;
+    object-fit: contain;
 }
 
 @keyframes loading {
@@ -178,16 +180,16 @@ img {
 
 @media (max-width: 600px) {
     .brand {
-        top: 24px;
-        left: 24px;
+        top: max(1rem, env(safe-area-inset-top));
+        left: max(1rem, env(safe-area-inset-left));
     }
 
     .loading-content {
-        width: min(360px, calc(100% - 40px));
+        width: min(22.5rem, 100%);
     }
 
     h1 {
-        font-size: 28px;
+        font-size: clamp(1.75rem, 8vw, 2.375rem);
     }
 }
 </style>

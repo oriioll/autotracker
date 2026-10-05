@@ -71,8 +71,9 @@ onMounted(() => {
 
 <style scoped>
 .theme-toggle {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,7 +98,7 @@ onMounted(() => {
 }
 
 .theme-toggle:active {
-    transform: scale(0.9);
+    transform: scale(.97);
 }
 
 .theme-toggle:focus-visible {

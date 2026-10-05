@@ -260,7 +260,8 @@ const faqs: { question: string; answer: string }[] = [
 
 <style scoped>
 .landing {
-    min-height: 100vh;
+    min-height: 100dvh;
+    padding-bottom: env(safe-area-inset-bottom);
     background: var(--color-bg);
     color: var(--color-text);
 }
@@ -274,7 +275,7 @@ const faqs: { question: string; answer: string }[] = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 5%;
+    padding: max(1rem, env(safe-area-inset-top)) var(--page-gutter) 1rem;
     gap: 1rem;
 }
 
@@ -285,13 +286,13 @@ const faqs: { question: string; answer: string }[] = [
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: clamp(.75rem, 2vw, 2rem);
 }
 
 .nav-actions img {
     border-radius: 50%;
-    height: 35px;
-    width: 35px;
+    height: 44px;
+    width: 44px;
     aspect-ratio: 1/1;
     object-fit: cover;
 }
@@ -352,11 +353,11 @@ const faqs: { question: string; answer: string }[] = [
 .hero {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 3rem 5% 4rem;
+    padding: clamp(2rem, 5vw, 3rem) var(--page-gutter) clamp(2.5rem, 6vw, 4rem);
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
-    gap: 3rem;
+    gap: clamp(1.5rem, 4vw, 3rem);
 }
 
 .hero-preview {
@@ -476,7 +477,7 @@ const faqs: { question: string; answer: string }[] = [
 }
 
 .mini-label {
-    font-size: 10px;
+    font-size: var(--fs-xs);
     color: var(--color-text-2);
 }
 
@@ -487,9 +488,9 @@ const faqs: { question: string; answer: string }[] = [
 }
 
 .mini-logo {
-    width: 26px;
-    height: 26px;
-    flex: 0 0 26px;
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
     display: grid;
     place-items: center;
     border: 1px solid var(--color-border);
@@ -501,9 +502,9 @@ const faqs: { question: string; answer: string }[] = [
 }
 
 .mini-logo--sm {
-    width: 22px;
-    height: 22px;
-    flex-basis: 22px;
+    width: 26px;
+    height: 26px;
+    flex-basis: 26px;
 }
 
 /* Orders table (mini) */
@@ -520,7 +521,7 @@ const faqs: { question: string; answer: string }[] = [
     padding: .5rem .75rem;
     background: var(--color-surface-2);
     color: var(--color-text-2);
-    font-size: 10px;
+    font-size: var(--fs-xs);
     font-weight: 600;
     letter-spacing: var(--ls-small);
     text-transform: uppercase;
@@ -553,7 +554,7 @@ const faqs: { question: string; answer: string }[] = [
     border-radius: 999px;
     background: var(--color-accent-soft);
     color: var(--color-accent);
-    font-size: 10px;
+    font-size: var(--fs-xs);
     font-weight: 600;
 }
 
@@ -571,7 +572,7 @@ const faqs: { question: string; answer: string }[] = [
 .how {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 4rem 5%;
+    padding: var(--section-space) var(--page-gutter);
     text-align: center;
 }
 
@@ -599,8 +600,8 @@ const faqs: { question: string; answer: string }[] = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: var(--color-accent-soft);
     color: var(--color-accent);
@@ -624,7 +625,7 @@ const faqs: { question: string; answer: string }[] = [
 .faq {
     max-width: 760px;
     margin: 0 auto;
-    padding: 4rem 5%;
+    padding: var(--section-space) var(--page-gutter);
 }
 
 .faq h2 {
@@ -657,7 +658,8 @@ const faqs: { question: string; answer: string }[] = [
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 1rem 1.5rem;
+    min-height: 48px;
+    padding: .75rem 1rem;
     font-weight: 600;
     cursor: pointer;
     list-style: none;
@@ -689,7 +691,7 @@ const faqs: { question: string; answer: string }[] = [
 }
 
 .faq-item p {
-    padding: 0 1.5rem 1.25rem;
+    padding: 0 1rem 1rem;
     font-size: var(--fs-sm);
     color: var(--color-text-2);
 }
@@ -704,7 +706,7 @@ const faqs: { question: string; answer: string }[] = [
 /* ---------- CTA final ---------- */
 .cta-final {
     text-align: center;
-    padding: 4rem 5%;
+    padding: var(--section-space) var(--page-gutter);
 }
 
 .cta-final h2 {
@@ -714,7 +716,7 @@ const faqs: { question: string; answer: string }[] = [
 }
 
 .footer {
-    padding: 2rem 5%;
+    padding: 2rem var(--page-gutter) max(2rem, env(safe-area-inset-bottom));
     border-top: 1px solid var(--color-border);
     text-align: center;
     font-size: var(--fs-sm);
@@ -724,10 +726,9 @@ const faqs: { question: string; answer: string }[] = [
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
     .hero {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: stretch;
         gap: 2rem;
-        flex-direction: column-reverse;
     }
 
     .hero-copy {
@@ -745,12 +746,59 @@ const faqs: { question: string; answer: string }[] = [
 }
 
 @media (max-width: 720px) {
+    .nav {
+        padding-right: max(var(--page-gutter), env(safe-area-inset-right));
+        padding-left: max(var(--page-gutter), env(safe-area-inset-left));
+    }
+
+    .nav-actions {
+        gap: .5rem;
+    }
+
     .preview-cards .mini-card:nth-child(n + 2) {
         display: none;
     }
 
     .steps {
         grid-template-columns: 1fr;
+        gap: .75rem;
+    }
+
+    .how,
+    .faq {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .how h2,
+    .faq h2 {
+        margin-bottom: 1.25rem;
+    }
+
+    .step {
+        padding: 1rem;
+    }
+
+    .step-number {
+        margin-bottom: .5rem;
+    }
+
+    .faq-list {
+        gap: .5rem;
+    }
+
+    .faq-item summary {
+        min-height: 44px;
+        padding: .6rem .75rem;
+        gap: .75rem;
+    }
+
+    .faq-item p {
+        padding: 0 .75rem .75rem;
+    }
+
+    .faq-note {
+        margin-top: 1rem;
     }
 
     .hero-copy h1 {
@@ -760,11 +808,40 @@ const faqs: { question: string; answer: string }[] = [
     .mini-table-header,
     .mini-table-row {
         grid-template-columns: 1.4fr .9fr;
+        gap: .35rem;
+        padding-inline: .5rem;
     }
 
     .mini-table-header span:last-child,
     .mini-table-row span.align-right {
         display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .preview-card {
+        padding: 1rem;
+    }
+
+    .preview-heading {
+        align-items: flex-start;
+        gap: .5rem;
+    }
+
+    .preview-subtitle {
+        text-align: right;
+    }
+
+    .mini-card {
+        min-width: 0;
+    }
+
+    .mini-card-summary {
+        flex: 0 0 auto;
+    }
+
+    .footer {
+        padding-bottom: max(2rem, env(safe-area-inset-bottom));
     }
 }
 </style>

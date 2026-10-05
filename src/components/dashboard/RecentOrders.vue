@@ -45,9 +45,9 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 2rem;
+    gap: clamp(1rem, 3vw, 2rem);
     width: 100%;
-    padding: 2rem 5%;
+    padding: clamp(1.25rem, 3vw, 2rem) var(--page-gutter);
 }
 
 .accent {
@@ -64,8 +64,7 @@ main {
 
 .table {
     width: 100%;
-    padding: 1rem 0;
-    overflow-x: auto;
+    padding: .5rem 0;
     display: flex;
     flex-wrap: wrap;
     gap: .5rem;
