@@ -16,6 +16,7 @@ const ORDERS: Ref<AppOrder[]> = ref([])
 const ordersLoading: Ref<boolean> = ref(false)
 const ordersError: Ref<boolean> = ref(false)
 const ordersErrorMsg: Ref<string> = ref('')
+const needsReconnect: Ref<boolean> = ref(false)
 /**
  * Handles the user last sync using auth service
  * @author Oriol Plazas León
@@ -45,9 +46,23 @@ const getUserOrders = async () => {
         ORDERS.value = await orderService.loadUserOrders();
     } catch (e: any) {
         ordersError.value = true;
+        needsReconnect.value = e.message === 'MISSING_GMAIL_SCOPE'
         ordersErrorMsg.value = e.message || 'Unable to get your orders, try again later'
     } finally {
         ordersLoading.value = false
+    }
+}
+/**
+ * Tries to reconnect the user Gmail account by using auth service 
+ * @author Oriol Plazas León
+ * @since 05/10/2026
+ */
+const reconnectGmail = async () => {
+    try {
+        await authService.loginWithGoogle()
+    } catch (e: any) {
+        needsReconnect.value = false
+        ordersErrorMsg.value = e.message
     }
 }
 onMounted(() => {
@@ -60,11 +75,21 @@ onMounted(() => {
     <DashboardLoading v-if="ordersLoading" />
     <DashboardHeader />
     <main v-if="ordersError" class="error-state" role="alert">
-        <h1>We couldn't load your orders</h1>
-        <p>{{ ordersErrorMsg }}</p>
-        <button type="button" class="retry-button" :disabled="ordersLoading" @click="getUserOrders">
-            Try again
-        </button>
+        <template v-if="needsReconnect">
+            <h1>Gmail access is missing</h1>
+            <p>Google didn't grant permission to read your emails. When you reconnect,
+                make sure the Gmail checkbox is ticked.</p>
+            <button type="button" class="retry-button" @click="reconnectGmail">
+                Reconnect Gmail
+            </button>
+        </template>
+        <template v-else>
+            <h1>We couldn't load your orders</h1>
+            <p>{{ ordersErrorMsg }}</p>
+            <button type="button" class="retry-button" :disabled="ordersLoading" @click="getUserOrders">
+                Try again
+            </button>
+        </template>
     </main>
     <RecentOrders v-if="!ordersLoading && !ordersError" :orders="ORDERS" />
     <DashboardOrders v-if="!ordersLoading && !ordersError" :orders="ORDERS" :sync-error="syncError"
