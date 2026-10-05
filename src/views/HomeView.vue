@@ -301,22 +301,7 @@ const faqs: { question: string; answer: string }[] = [
 }
 
 .avatar-skeleton {
-    background: linear-gradient(100deg,
-            var(--color-surface-2) 35%,
-            var(--color-border) 50%,
-            var(--color-surface-2) 65%);
-    background-size: 300% 100%;
-    animation: avatar-skeleton-shimmer 1.8s ease-in-out infinite;
-}
-
-@keyframes avatar-skeleton-shimmer {
-    0% {
-        background-position: 100% 0;
-    }
-
-    100% {
-        background-position: -100% 0;
-    }
+    background: var(--color-surface-2);
 }
 
 .btn-ghost {
@@ -329,12 +314,7 @@ const faqs: { question: string; answer: string }[] = [
     font-weight: 500;
     color: var(--color-text);
     cursor: pointer;
-    transition: all .3s ease;
-}
-
-.btn-ghost:hover {
-    background: var(--color-surface-2);
-    border-color: var(--color-accent);
+    transition: background-color 180ms ease, border-color 180ms ease;
 }
 
 .btn-primary {
@@ -347,12 +327,25 @@ const faqs: { question: string; answer: string }[] = [
     font-size: var(--fs-base);
     font-weight: 600;
     cursor: pointer;
-    transition: all .3s ease;
+    transition: opacity 180ms ease, transform 180ms ease-in-out;
 }
 
-.btn-primary:hover {
-    opacity: 0.88;
-    transform: translateY(-1px);
+.btn-ghost:active,
+.btn-primary:active {
+    transform: scale(.97);
+    transition: transform 120ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn-ghost:hover {
+        background: var(--color-surface-2);
+        border-color: var(--color-accent);
+    }
+
+    .btn-primary:hover {
+        opacity: .88;
+        transform: translateY(-1px);
+    }
 }
 
 /* ---------- Hero ---------- */
