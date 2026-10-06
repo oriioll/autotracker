@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Allow: /terms
+Allow: /privacy
+Allow: /cookies
+Disallow: /login
+Disallow: /dashboard
+Disallow: /api/
+Disallow: /_next/
+Disallow: /assets/
+Disallow: /*.json$
+Disallow: /*.xml$
+
+Host: app-autotracker.vercel.app
+Sitemap: https://app-autotracker.vercel.app/sitemap.xml

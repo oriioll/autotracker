@@ -1,0 +1,20 @@
+# AutoTracker
+
+AutoTracker is a Gmail-first order tracking service for consumers who want to follow online purchases and deliveries from one dashboard.
+
+## What the product does
+AutoTracker reads order confirmation and shipping emails from Gmail, extracts order details, and surfaces tracking information in a simple dashboard for the user.
+
+## Key pages
+- Homepage: https://app-autotracker.vercel.app/
+- Privacy Policy: https://app-autotracker.vercel.app/privacy
+- Terms of Service: https://app-autotracker.vercel.app/terms
+- Cookie Policy: https://app-autotracker.vercel.app/cookies
+
+## Important notes
+- The service is designed for personal account use and requires Google account access to read relevant order-related email content.
+- The app stores structured order metadata such as merchant, tracking number, totals, and delivery status.
+- Legal and privacy disclosures are published on the site and should be treated as the source of truth for consent, retention, and processor details.
+
+## Brand and positioning
+AutoTracker is positioned as a private, customer-friendly productivity and order tracking tool that reduces the friction of managing deliveries across multiple retailers.

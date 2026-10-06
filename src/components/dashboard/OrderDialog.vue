@@ -29,7 +29,7 @@ const emit = defineEmits(['close'])
             </header>
 
             <section class="parties" aria-label="Order company and carrier">
-                <a v-if="company?.website" class="party" :href="company.website" target="_blank" rel="noreferrer"
+                <a v-if="company?.website" class="party" :href="company.website" target="_blank" rel="noopener noreferrer"
                     @click.stop>
                     <span class="party__logo">
                         <img v-if="company.svg" :src="company.svg" :alt="`${company.name} logo`">
@@ -48,7 +48,7 @@ const emit = defineEmits(['close'])
                     </span>
                 </div>
 
-                <a v-if="carrier?.website" class="party" :href="carrier.website" target="_blank" rel="noreferrer"
+                <a v-if="carrier?.website" class="party" :href="carrier.website" target="_blank" rel="noopener noreferrer"
                     @click.stop>
                     <span class="party__logo">
                         <img v-if="carrier.svg" :src="carrier.svg" :alt="`${carrier.name} logo`">

@@ -25,7 +25,7 @@ onBeforeMount(() => {
     </Transition>
     <article @click="showDialog = true" class="card">
         <div class="card__identity">
-            <a v-if="company" class="company__logo" :href="company.website" target="_blank" rel="noreferrer"
+            <a v-if="company" class="company__logo" :href="company.website" target="_blank" rel="noopener noreferrer"
                 @click.stop>
                 <img v-if="company.svg" :src="company.svg" :alt="`${company.name} logo`">
                 <span v-else>{{ company.name[0]?.toUpperCase() || '-' }}</span>

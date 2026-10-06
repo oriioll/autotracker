@@ -44,7 +44,7 @@ const handleGoogleLogin = async () => {
             </div>
             <div class="loginButton">
                 <LoginWithGoogleButton @handle-google-login="handleGoogleLogin" :login-loading="loginLoading" />
-                <span class="errorMsg" v-if="!loginError">{{ loginErrorMsg }}</span>
+                <span class="errorMsg" v-if="loginError">{{ loginErrorMsg }}</span>
             </div>
             <p class="login-terms">
                 By continuing, you agree to our

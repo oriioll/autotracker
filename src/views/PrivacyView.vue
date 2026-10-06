@@ -49,7 +49,7 @@
             <p>AutoTracker's use and transfer to any other app of information received from Google APIs will adhere to
                 the
                 <a href="https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes"
-                    target="_blank" rel="noreferrer">Google API Services User Data Policy</a>, including the Limited Use
+                    target="_blank" rel="noopener noreferrer">Google API Services User Data Policy</a>, including the Limited Use
                 requirements. No humans read your email data unless you agree, it is not used for advertising, and it is
                 not
                 used to train generalized AI models. You can revoke access at any time in your Google Account settings.
@@ -76,7 +76,7 @@
                 This is done to display the site correctly (legitimate interest, Art. 6(1)(f) GDPR), and we do not
                 receive
                 or store this information. Google handles it under its own
-                <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">Privacy Policy</a>.
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
             </p>
             <h2>7. Your rights</h2>
             <p>You may request access, rectification, erasure, restriction, portability or objection, and withdraw
@@ -86,10 +86,10 @@
                 To exercise these rights, email <a href="mailto:orimypro7@gmail.com">orimypro7@gmail.com</a>; we will
                 reply
                 within one month. You may also complain to the Spanish Data Protection Agency (AEPD): <a
-                    href="https://www.aepd.es" target="_blank" rel="noreferrer">aepd.es</a>, or, if you are in the UK,
+                <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">aepd.es</a>, or, if you are in the UK,
                 to the
                 Information Commissioner's Office (<a href="https://ico.org.uk" target="_blank"
-                    rel="noreferrer">ico.org.uk</a>), or to your local data protection authority.</p>
+                    rel="noopener noreferrer">ico.org.uk</a>), or to your local data protection authority.</p>
 
             <h2>8. Who can use AutoTracker</h2>
             <p>AutoTracker is intended for people aged 18 or over and for use in Spain and the European Economic Area.
