@@ -45,9 +45,10 @@ const choose = (choice: OptionalStorageChoice) => {
                 </button>
             </div>
         </section>
+        <!-- Button commented out since it isn't important and blocks ui
         <button v-else type="button" class="storage-consent__launcher" @click="isOpen = true">
             Privacy settings
-        </button>
+        </button>-->
     </aside>
 </template>
 
