@@ -4,10 +4,14 @@ import { AuthService } from '@/services/auth.service';
 import type { AppUser } from '@/types/AppUser';
 import { ref } from 'vue';
 import { onMounted, type Ref } from 'vue';
+const props = defineProps<{
+    demo: boolean
+}>()
 const userAvatar: Ref<string> = ref('')
 const isLoading: Ref<boolean> = ref(false)
 const authService: AuthService = new AuthService()
 onMounted(async () => {
+    if (props.demo) return
     try {
         isLoading.value = true
         const user: AppUser = await authService.getMe();
@@ -34,14 +38,14 @@ const handleLogout = async () => {
 }
 </script>
 <template>
-    <header>
-        <router-link to="/dashboard">
+    <header :class="{ 'header--demo': props.demo }">
+        <router-link :to="props.demo ? '/demo' : '/dashboard'">
             <h3>Auto<span class="accent">Tracker</span></h3>
         </router-link>
         <span class="empty"></span>
         <aside>
             <ThemeToggle />
-            <el-dropdown v-if="!isLoading" trigger="click" @command="handleLogout">
+            <el-dropdown v-if="!props.demo && !isLoading" trigger="click" @command="handleLogout">
                 <img class="avatar" :src="userAvatar" alt="Your Google profile picture">
                 <template #dropdown>
                     <el-dropdown-menu>
@@ -53,7 +57,7 @@ const handleLogout = async () => {
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
-            <img v-else class="avatar-skeleton" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""
+            <img v-else-if="!props.demo" class="avatar-skeleton" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""
                 aria-hidden="true">
 
         </aside>
@@ -71,6 +75,10 @@ header {
     gap: 1rem;
     background: var(--color-bg);
     z-index: 900;
+}
+
+header.header--demo {
+    top: 3.25rem;
 }
 
 header a {

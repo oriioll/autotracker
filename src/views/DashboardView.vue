@@ -3,11 +3,16 @@ import DashboardHeader from '@/components/dashboard/DashboardHeader.vue';
 import DashboardOrders from '@/components/dashboard/DashboardOrders.vue';
 import RecentOrders from '@/components/dashboard/RecentOrders.vue';
 import DashboardLoading from '@/components/dashboard/DashboardLoading.vue';
+import DemoBanner from '@/components/dashboard/DemoBanner.vue';
 import { AuthService } from '@/services/auth.service';
 import { OrderService } from '@/services/order.service';
 import type { AppOrder } from '@/types/AppOrder';
 import { formatLastSync } from '@/util/helper';
-import { onMounted, ref, type Ref } from 'vue';
+import { demoOrders } from '@/data/demoOrders';
+import { computed, onMounted, ref, watch, type Ref } from 'vue';
+import { useRoute } from 'vue-router';
+const route = useRoute();
+const isDemo = computed(() => route.meta.demo === true);
 const authService: AuthService = new AuthService();
 const orderService: OrderService = new OrderService();
 const lastSync: Ref<string> = ref('')
@@ -65,15 +70,30 @@ const reconnectGmail = async () => {
         ordersErrorMsg.value = e.message
     }
 }
-onMounted(() => {
+/**
+ * Loads the dashboard with demo orders or real gmail orders
+ */
+const loadDashboard = () => {
+    if (isDemo.value) {
+        ORDERS.value = demoOrders;
+        syncError.value = true
+        ordersError.value = false
+        ordersErrorMsg.value = ''
+        needsReconnect.value = false
+        return
+    }
     handleUserLastSync()
     getUserOrders()
-})
+}
+
+onMounted((loadDashboard))
+watch(isDemo, loadDashboard)
 </script>
 
 <template>
     <DashboardLoading v-if="ordersLoading" />
-    <DashboardHeader />
+    <DemoBanner v-if="isDemo" />
+    <DashboardHeader :demo="isDemo" />
     <main v-if="ordersError" class="error-state" role="alert">
         <template v-if="needsReconnect">
             <h1>Gmail access is missing</h1>

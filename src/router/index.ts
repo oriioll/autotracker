@@ -53,6 +53,18 @@ const router = createRouter({
       },
     },
     {
+      path: '/demo',
+      name: 'demo',
+      component: DashboardView,
+      meta: {
+        demo: true,
+        title: 'Dashboard demo | AutoTracker',
+        description: 'Explore the AutoTracker orders dashboard with sample order data.',
+        canonical: '/demo',
+        robots: 'noindex, nofollow',
+      },
+    },
+    {
       path: '/terms',
       name: 'terms',
       component: TermsView,
@@ -100,10 +112,12 @@ const router = createRouter({
 // Guard
 router.beforeEach(async (to, from, next) => {
   let user: AppUser | null = null
-  try {
-    user = await authService.getMe()
-  } catch {
-    user = null
+  if (!to.meta.demo) {
+    try {
+      user = await authService.getMe()
+    } catch {
+      user = null
+    }
   }
   // Required user routes (dashboard)
   if (to.meta.requiresAuth && !user) {

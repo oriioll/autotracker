@@ -194,12 +194,15 @@ const faqs: { question: string; answer: string }[] = [
                     purchases and shipments automatically, so you never have to dig
                     through your inbox to know where a package is.
                 </p>
-                <button v-if="!isLoggedIn" class="btn-primary" @click="goToLogin">
-                    Connect with Google
-                </button>
-                <button v-else class="btn-primary" @click="goToDashboard">
-                    Go to Dashboard
-                </button>
+                <div class="cta-actions hero-actions">
+                    <button v-if="!isLoggedIn" class="btn-primary" @click="goToLogin">
+                        Connect with Google
+                    </button>
+                    <button v-else class="btn-primary" @click="goToDashboard">
+                        Go to Dashboard
+                    </button>
+                    <router-link class="btn-secondary" to="/demo">Try a demo with sample orders</router-link>
+                </div>
                 <p class="hero-note">Read-only access. Revoke it anytime.</p>
             </div>
         </section>
@@ -243,12 +246,15 @@ const faqs: { question: string; answer: string }[] = [
         <!-- CTA final -->
         <section class="cta-final">
             <h2>Stop searching your inbox for orders.</h2>
-            <button v-if="!isLoggedIn" class="btn-primary" @click="goToLogin">
-                Connect with Google
-            </button>
-            <button v-else class="btn-primary" @click="goToDashboard">
-                Go to Dashboard
-            </button>
+            <div class="cta-actions">
+                <button v-if="!isLoggedIn" class="btn-primary" @click="goToLogin">
+                    Connect with Google
+                </button>
+                <button v-else class="btn-primary" @click="goToDashboard">
+                    Go to Dashboard
+                </button>
+                <router-link class="btn-secondary" to="/demo">Try the demo</router-link>
+            </div>
         </section>
         <footer class="footer">
             <router-link to="/privacy">Privacy</router-link> ·
@@ -331,8 +337,36 @@ const faqs: { question: string; answer: string }[] = [
     transition: opacity 180ms ease, transform 180ms ease-in-out;
 }
 
+.cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .75rem;
+}
+
+.hero-actions {
+    justify-content: flex-start;
+}
+
+.btn-secondary {
+    min-height: 44px;
+    padding: 12px 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: var(--fs-base);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease-in-out;
+}
+
 .btn-ghost:active,
-.btn-primary:active {
+.btn-primary:active,
+.btn-secondary:active {
     transform: scale(.97);
     transition: transform 120ms var(--ease-out);
 }
@@ -345,6 +379,12 @@ const faqs: { question: string; answer: string }[] = [
 
     .btn-primary:hover {
         opacity: .88;
+        transform: translateY(-1px);
+    }
+
+    .btn-secondary:hover {
+        background: var(--color-surface-2);
+        border-color: var(--color-accent);
         transform: translateY(-1px);
     }
 }
@@ -383,7 +423,7 @@ const faqs: { question: string; answer: string }[] = [
     line-height: var(--lh-body);
 }
 
-.hero-copy .btn-primary {
+.hero-copy .hero-actions {
     margin-top: 1.5rem;
 }
 
@@ -729,6 +769,10 @@ const faqs: { question: string; answer: string }[] = [
         flex-direction: column-reverse;
         align-items: stretch;
         gap: 2rem;
+    }
+
+    .hero-actions {
+        justify-content: center;
     }
 
     .hero-copy {
